@@ -42,7 +42,7 @@ const summaries = (state = initialState, action) => {
         isFetching: false
       })
     case CLEAR_FORM:
-      return Object.assign({}, state,
+      return Object.assign({}, state, {
         name: '',
         birthday: null,
         address: '',
