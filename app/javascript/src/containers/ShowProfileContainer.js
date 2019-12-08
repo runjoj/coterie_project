@@ -10,28 +10,22 @@ class ShowProfileContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.showProfile()
+    const summaryKey = this.props.match.params.id
+    this.props.showProfile(summaryKey)
   }
 
   render() {
-    let displaySummary = this.props.profileSummary.map((summary) => {
-      let id = profileSummary.id
-      let name = profileSummary.name
-      let birthday = profileSummary.birthday
-      let address = profileSummary.address
-
-      return (
-        <ShowProfile
-          key={id}
-          name={name}
-          birthday={birthday}
-          address={address}
-        />
-      )
-    })
     return(
       <div>
-        {displaySummary}
+        <ShowProfile
+          key={this.props.id}
+          name={this.props.name}
+          birthday={this.props.birthday}
+          address={this.props.address}
+          email={this.props.email}
+          salary={this.props.salary}
+          coverage={this.props.coverage}
+        />
       </div>
     )
   }
@@ -39,13 +33,19 @@ class ShowProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profileSummary: state.summaries.profileSummary
+    id: state.summaries.profileSummary.id,
+    name: state.summaries.profileSummary.name,
+    birthday: state.summaries.profileSummary.birthday,
+    address: state.summaries.profileSummary.address,
+    email: state.summaries.profileSummary.email,
+    salary: state.summaries.profileSummary.salary,
+    coverage: state.summaries.profileSummary.coverage
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    showProfile: () => dispatch(showProfile())
+    showProfile: (profile) => dispatch(showProfile(profile))
   }
 }
 

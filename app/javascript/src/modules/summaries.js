@@ -9,7 +9,7 @@ const initialState = {
   salary: null,
   coverage: null,
   isFetching: false,
-  userId: ''
+  summaryId: ''
 }
 
 const summaries = (state = initialState, action) => {
@@ -30,7 +30,8 @@ const summaries = (state = initialState, action) => {
       })
     case SHOW_PROFILE_REQUEST:
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: true,
+        summaryId: state.profileSummary.id
       })
     case SHOW_PROFILE_REQUEST_SUCCESS:
       return Object.assign({}, state, {
@@ -89,10 +90,10 @@ const postProfileRequest = () => {
 
 const POST_PROFILE_REQUEST_SUCCESS = 'POST_PROFILE_REQUEST_SUCCESS'
 
-const postProfileRequestSuccess = profile => {
+const postProfileRequestSuccess = summaries => {
   return {
     type: POST_PROFILE_REQUEST_SUCCESS,
-    profile
+    summaries
   }
 }
 
@@ -114,10 +115,10 @@ const showProfileRequest = () => {
 
 const SHOW_PROFILE_REQUEST_SUCCESS = 'SHOW_PROFILE_REQUEST_SUCCESS'
 
-const showProfileRequestSuccess = profiles => {
+const showProfileRequestSuccess = summaries => {
   return {
     type: SHOW_PROFILE_REQUEST_SUCCESS,
-    profiles
+    summaries
   }
 }
 
@@ -197,11 +198,16 @@ const handleCoverageChange = event => {
   }
 }
 
-const showProfile = () => {
+const showProfile = (summaryKey) => {
   return (dispatch) => {
     dispatch(showProfileRequest())
-
-    return fetch(`/api/v1/profiles/${userId}.json`)
+    return fetch(`/api/v1/profiles/${summaryKey}.json`,
+      {
+        method: 'GET',
+        credentials: 'same-origin',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+      }
+    )
     .then(response => {
       if (response.ok) {
         return response.json()
