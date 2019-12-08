@@ -10,6 +10,8 @@ import { clearForm,
   postProfile
   } from '..modules/summaries'
 
+import InputField from '..components/InputField'
+
 class ProfileFormContainer extends Component {
   constructor(props) {
     super(props)
