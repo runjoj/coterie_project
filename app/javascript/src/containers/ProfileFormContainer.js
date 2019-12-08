@@ -86,3 +86,32 @@ class ProfileFormContainer extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    name: state.summaries.name,
+    birthday: state.summaries.birthday,
+    address: state.summaries.address,
+    email: state.summaries.email,
+    salary: state.summaries.salary,
+    coverage: state.summaries.coverage
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postProfile: (profile) => dispatch(postProfile(profile)),
+    clearForm: () => dispatch(clearForm()),
+    handleNameChange: (event) => dispatch(handleNameChange(event)),
+    handleBirthdayChange: (event) => dispatch(handleBirthdayChange(event)),
+    handleAddressChange: (event) => dispatch(handleAddressChange(event)),
+    handleEmailChange: (event) => dispatch(handleEmailChange(event)),
+    handleSalaryChange: (event) => dispatch(handleSalaryChange(event)),
+    handleCoverageChange: (event) => dispatch(handleCoverageChange(event))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileFormContainer)
