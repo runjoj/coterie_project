@@ -33,10 +33,10 @@ const getProfileRequest = () => {
 
 const GET_PROFILE_REQUEST_SUCCESS = 'GET_PROFILE_REQUEST_SUCCESS'
 
-const getProfileRequestSuccess = summaries => {
+const getProfileRequestSuccess = profiles => {
   return {
     type: GET_PROFILE_REQUEST_SUCCESS,
-    summaries
+    profiles
   }
 }
 
@@ -62,9 +62,9 @@ const getProfile = () => {
         return { error: 'Something went wrong.' }
       }
     })
-    .then(profile => {
-      if(!profile.error){
-        dispatch(getProfileRequestSuccess(profile))
+    .then(profiles => {
+      if(!profiles.error){
+        dispatch(getProfileRequestSuccess(profiles))
       }
     })
   }
