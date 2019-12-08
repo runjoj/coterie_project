@@ -10,6 +10,7 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/profile/:id" component={ShowProfileContainer} />
+        <Route exact path="/profiles" component={ProfileFormContainer} />
       </Switch>
     </BrowserRouter>
   </Provider>
