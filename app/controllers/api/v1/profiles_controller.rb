@@ -12,11 +12,17 @@ class Api::V1::ProfilesController < ApplicationController
   end
 
   def create
-    profile = Profile.new
+    profile = Profile.new(profile_params)
     if profile.save
-      render json: profile
+      render json: profile, status: :created
     else
-      render json: {error: "There was an error."}
+      render json: {error: profile.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def profile_params
+    params.require(:profile).permit(:name, :birthday, :address, :email, :salary, :coverage)
   end
 end

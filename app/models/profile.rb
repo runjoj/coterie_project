@@ -9,6 +9,4 @@ class Profile < ApplicationRecord
 
   validates_presence_of :name, :birthday, :address, :email, :salary, :coverage
 
-  belongs_to :user
-
 end

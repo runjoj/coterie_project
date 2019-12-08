@@ -15,45 +15,65 @@ const initialState = {
 const summaries = (state = initialState, action) => {
   switch(action.type) {
     case POST_PROFILE_REQUEST:
-      return {...state, isFetching: true }
+      return Object.assign({}, state, {
+        isFetching: true
+      })
     case POST_PROFILE_REQUEST_SUCCESS:
       const newProfile = state.profileSummary.concat(action.profile)
-      return {...state,
+      return Object.assign({}, state, {
         profileSummary: newProfile,
         isFetching: false
-      }
+      })
     case POST_PROFILE_REQUEST_FAILURE:
-      return {...state, isFetching: false }
+      return Object.assign({}, state, {
+        isFetching: false
+      })
     case SHOW_PROFILE_REQUEST:
-      return {...state, isFetching: true}
+      return Object.assign({}, state, {
+        isFetching: true
+      })
     case SHOW_PROFILE_REQUEST_SUCCESS:
-      return {...state,
+      return Object.assign({}, state, {
         profileSummary: action.summaries,
         isFetching: false
-      }
+      })
     case SHOW_PROFILE_REQUEST_FAILURE:
-      return {...state, isFetching: false}
+      return Object.assign({}, state, {
+        isFetching: false
+      })
     case CLEAR_FORM:
-      return {...state,
+      return Object.assign({}, state, {
         name: '',
         birthday: null,
         address: '',
         email: '',
         salary: null,
         coverage: null
-      }
+      })
     case HANDLE_NAME_CHANGE:
-      return {...state, name: action.newName}
+      return Object.assign({}, state, {
+        name: action.newName
+      })
     case HANDLE_BIRTHDAY_CHANGE:
-      return {...state, birthday: action.newBirthday}
+      return Object.assign({}, state, {
+        birthday: action.newBirthday
+      })
     case HANDLE_ADDRESS_CHANGE:
-      return {...state, address: action.newAddress}
+      return Object.assign({}, state, {
+        address: action.newAddress
+      })
     case HANDLE_EMAIL_CHANGE:
-      return {...state, email: action.newEmail}
+      return Object.assign({}, state, {
+        email: action.newEmail
+      })
     case HANDLE_SALARY_CHANGE:
-      return {...state, salary: action.newSalary}
+      return Object.assign({}, state, {
+        salary: action.newSalary
+      })
     case HANDLE_COVERAGE_CHANGE:
-      return {...state, coverage: action.newCoverage}
+      return Object.assign({}, state, {
+        coverage: action.newCoverage
+      })
     default:
       return state
   }
