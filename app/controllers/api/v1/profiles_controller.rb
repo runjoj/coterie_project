@@ -1,7 +1,5 @@
-class Api::V1::LocationsController < ApplicationController
+class Api::V1::ProfilesController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
-
-  before_action :authenticate_user
 
   def index
     profiles = Profile.all
@@ -21,3 +19,4 @@ class Api::V1::LocationsController < ApplicationController
       render json: {error: "There was an error."}
     end
   end
+end

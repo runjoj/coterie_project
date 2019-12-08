@@ -1,3 +1,5 @@
+import { displayAlertMessage } from './alertMessage.js'
+
 const initialState = {
   profileSummary: [],
   name: '',
@@ -215,7 +217,7 @@ const postProfile = summaryData => {
       } else {
         dispatch(postProfileRequestFailure())
         dispatch(displayAlertMessage("Something went wrong."))
-        return { error: 'Somethign went wrong.' }
+        return { error: 'Something went wrong.' }
       }
     })
     .then(profile => {
