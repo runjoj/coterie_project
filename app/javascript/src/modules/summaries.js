@@ -73,7 +73,7 @@ const postProfileRequestSuccess = profile => {
   }
 }
 
-const POST_PROFILE_REQUEST_SUCCESS = 'POST_PROFILE_REQUEST_FAILURE'
+const POST_PROFILE_REQUEST_FAILURE = 'POST_PROFILE_REQUEST_FAILURE'
 
 const postProfileRequestFailure = () => {
   return {
