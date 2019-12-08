@@ -1,9 +1,9 @@
 class ProfilesController < ApplicationController
 
-  def show
+  def index
   end
 
-  def create
+  def show
   end
 
 end

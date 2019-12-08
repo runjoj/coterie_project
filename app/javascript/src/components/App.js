@@ -1,19 +1,14 @@
 import React from 'react'
-import { BrowserRouter, Route, Router, Switch, History } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import ShowProfileContainer from '../containers/ShowProfileContainer'
-import ProfileFormContainer from '../containers/ProfileFormContainer'
+import PageContainer from '../containers/PageContainer'
 
 const App = (props) => {
-  <Provider store={props.store}>
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/profile/:id" component={ShowProfileContainer} />
-        <Route exact path="/profiles" component={ProfileFormContainer} />
-      </Switch>
-    </BrowserRouter>
-  </Provider>
+  return (
+    <Provider store={props.store}>
+      <PageContainer />
+    </Provider>
+  )
 }
 
 export default App
