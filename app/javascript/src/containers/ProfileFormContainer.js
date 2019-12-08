@@ -8,9 +8,9 @@ import { clearForm,
   handleSalaryChange,
   handleCoverageChange,
   postProfile
-  } from '..modules/summaries'
+} from '../modules/summaries'
 
-import InputField from '..components/InputField'
+import InputField from '../components/InputField'
 
 class ProfileFormContainer extends Component {
   constructor(props) {

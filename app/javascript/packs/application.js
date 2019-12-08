@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import configureStore from '..src/store/configureStore';
+import configureStore from '../src/store/configureStore';
 import App from '../src/components/App'
 import RedBox from 'redbox-react'
 
