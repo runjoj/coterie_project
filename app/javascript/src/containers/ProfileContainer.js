@@ -22,6 +22,7 @@ class ProfileContainer extends Component {
       return (
         <Profile
           key={id}
+          id={id}
           name={name}
         />
       )

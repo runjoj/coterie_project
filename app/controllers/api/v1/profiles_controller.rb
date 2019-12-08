@@ -7,7 +7,7 @@ class Api::V1::ProfilesController < ApplicationController
   end
 
   def show
-    profile = Profile.find(params["id"])
+    profile = Profile.find(params[:id])
     render json: profile
   end
 
@@ -23,6 +23,6 @@ class Api::V1::ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:name, :birthday, :address, :email, :salary, :coverage)
+    params.require(:profile).permit(:name, :birthday, :address, :email, :salary, :coverage, :id)
   end
 end

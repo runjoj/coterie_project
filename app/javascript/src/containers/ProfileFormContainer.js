@@ -32,7 +32,7 @@ class ProfileFormContainer extends Component {
     }
 
     this.props.postProfile(summaryData)
-    
+
     this.props.clearForm()
   }
 
