@@ -6,7 +6,8 @@ const initialState = {
   email: '',
   salary: null,
   coverage: null,
-  isFetching: false
+  isFetching: false,
+  userId: ''
 }
 
 const summaries = (state = initialState, action) => {
@@ -21,6 +22,15 @@ const summaries = (state = initialState, action) => {
       }
     case POST_PROFILE_REQUEST_FAILURE:
       return {...state, isFetching: false }
+    case SHOW_PROFILE_REQUEST:
+      return {...state, isFetching: true}
+    case SHOW_PROFILE_REQUEST_SUCCESS:
+      return {...state,
+        profileSummary: action.summaries,
+        isFetching: false
+      }
+    case SHOW_PROFILE_REQUEST_FAILURE:
+      return {...state, isFetching: false}
     case CLEAR_FORM:
       return {...state,
         name: '',
@@ -42,15 +52,6 @@ const summaries = (state = initialState, action) => {
       return {...state, salary: action.newSalary}
     case HANDLE_COVERAGE_CHANGE:
       return {...state, coverage: action.newCoverage}
-    case GET_PROFILE_REQUEST:
-      return {...state, isFetching: true}
-    case GET_PROFILE_REQUEST_SUCCESS:
-      return {...state,
-        profileSummary: action.summaries,
-        isFetching: false
-      }
-    case GET_PROFILE_REQUEST_FAILURE:
-      return {...state, isFetching: false}
     default:
       return state
   }
@@ -78,6 +79,31 @@ const POST_PROFILE_REQUEST_FAILURE = 'POST_PROFILE_REQUEST_FAILURE'
 const postProfileRequestFailure = () => {
   return {
     type: POST_PROFILE_REQUEST_FAILURE
+  }
+}
+
+const SHOW_PROFILE_REQUEST = 'SHOW_PROFILE_REQUEST'
+
+const showProfileRequest = () => {
+  return {
+    type: SHOW_PROFILE_REQUEST
+  }
+}
+
+const SHOW_PROFILE_REQUEST_SUCCESS = 'SHOW_PROFILE_REQUEST_SUCCESS'
+
+const showProfileRequestSuccess = profiles => {
+  return {
+    type: SHOW_PROFILE_REQUEST_SUCCESS,
+    profiles
+  }
+}
+
+const SHOW_PROFILE_REQUEST_FAILURE = 'SHOW_PROFILE_REQUEST_FAILURE'
+
+const showProfileRequestFailure = () => {
+  return {
+    type: SHOW_PROFILE_REQUEST_FAILURE
   }
 }
 
@@ -149,48 +175,23 @@ const handleCoverageChange = event => {
   }
 }
 
-const GET_PROFILE_REQUEST = 'GET_PROFILE_REQUEST'
-
-const getProfileRequest = () => {
-  return {
-    type: GET_PROFILE_REQUEST
-  }
-}
-
-const GET_PROFILE_REQUEST_SUCCESS = 'GET_PROFILE_REQUEST_SUCCESS'
-
-const getProfileRequestSuccess = summaries => {
-  return {
-    type: GET_PROFILE_REQUEST_SUCCESS,
-    summaries
-  }
-}
-
-const GET_PROFILE_REQUEST_FAILURE = 'GET_PROFILE_REQUEST_FAILURE'
-
-const getProfileRequestFailure = () => {
-  return {
-    type: GET_PROFILE_REQUEST_FAILURE
-  }
-}
-
-const getProfile = () => {
+const showProfile = () => {
   return (dispatch) => {
-    dispatch(getProfileRequest())
+    dispatch(showProfileRequest())
 
-    return fetch('/api/v1/profiles.json')
+    return fetch(`/api/v1/profiles/${userId}.json`)
     .then(response => {
       if (response.ok) {
         return response.json()
       } else {
-        dispatch(getProfileRequestFailure())
+        dispatch(showProfileRequestFailure())
         dispatch(displayAlertMessage("Something went wrong."))
         return { error: 'Something went wrong.' }
       }
     })
     .then(profile => {
       if(!profile.error){
-        dispatch(getProfileRequestSuccess(profile))
+        dispatch(showProfileRequestSuccess(profile))
       }
     })
   }
@@ -228,7 +229,7 @@ const postProfile = summaryData => {
 export {
   summaries,
   postProfile,
-  getProfile,
+  showProfile,
   clearForm,
   handleNameChange,
   handleEmailChange,

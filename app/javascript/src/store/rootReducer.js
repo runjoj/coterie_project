@@ -5,6 +5,7 @@ import { summaries } from '../modules/summaries'
 
 let rootReducer = combineReducers({
   summaries,
+  profiles,
   alertMessage
 });
 
