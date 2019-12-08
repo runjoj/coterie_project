@@ -1,5 +1,5 @@
 const initialState = {
-  allProfiles: = [],
+  allProfiles: [],
   isFetching: false
 }
 
@@ -67,5 +67,6 @@ const getProfile = () => {
 }
 
 export {
-  getProfile
+  getProfile,
+  profiles
 }

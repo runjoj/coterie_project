@@ -7,9 +7,8 @@ class Profile < ApplicationRecord
     20000,
   ]
 
-validates_presence_of :name, :birthday, :address, :email, :salary
-validates :coverage,
-  presence: true,
-  includsion: { in: COVERAGES }
+  validates_presence_of :name, :birthday, :address, :email, :salary, :coverage
 
-belongs_to :user
+  belongs_to :user
+
+end
