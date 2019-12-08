@@ -1,4 +1,11 @@
-<p>
-  Modify me in `app/views/homes/index.html.erb` or change the root directive in
-  `config/routes.rb`
-</p>
+<div>
+  <h1>Welcome to a world where insurance is made easy by Coterie!</h1>
+  <ul>
+    <%- if current_user -%>
+      <li class="button large"><%= link_to 'START HERE' %></li>
+    <%- else -%>
+      <li class="button large"><%= link_to 'Sign Up', new_user_registration_path %></li>
+      <li class="button large"><%= link_to 'Sign In', new_user_session_path %></li>
+    <%- end -%>
+  </ul>
+</div>
