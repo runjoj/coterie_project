@@ -5,10 +5,9 @@ const initialState = {
 const alertMessage = (state = initialState, action) => {
   switch (action.type) {
     case DISPLAY_ALERT_MESSAGE:
-      return {
-        ...state,
+      return Object.assign({}, state, {
         message: action.alertMessage
-      }
+      })
     case CLOSE_ALERT_MESSAGE:
       return initialState
     default:

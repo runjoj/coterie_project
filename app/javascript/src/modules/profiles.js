@@ -6,14 +6,18 @@ const initialState = {
 const profiles = (state = initialState, action) => {
   switch(action.type) {
   case GET_PROFILE_REQUEST:
-    return {...state, isFetching: true}
+    return Object.assign({}, state, {
+      isFetching: true
+    })
   case GET_PROFILE_REQUEST_SUCCESS:
-    return {...state,
+    return Object.assign({}, state, {
       allProfiles: action.profiles,
       isFetching: false
-    }
+    })
   case GET_PROFILE_REQUEST_FAILURE:
-    return {...state, isFetching: false}
+    return Object.assign({}, state, {
+      isFetching: false
+    })
   default:
     return state
   }
