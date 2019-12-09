@@ -2,14 +2,19 @@ import React from 'react'
 
 const ShowProfile = (props) => {
   return (
-    <ul>
-      <li>{props.name}</li>
-      <li>{props.birthday}</li>
-      <li>{props.address}</li>
-      <li>{props.email}</li>
-      <li>{props.salary}</li>
-      <li>{props.coverage}</li>
-    </ul>
+    <div className="profile-details">
+      <div>
+        <h3 className="profile-heading">Your Summary Details</h3>
+        <h4 className="profile-name">{props.name}</h4>
+      </div>
+      <div>
+        <p>Date of Birth: {props.birthday}</p>
+        <p>Address: {props.address}</p>
+        <p>Email: {props.email}</p>
+        <p>Salary: {props.salary}</p>
+        <p>Selected Coverage: {props.coverage}</p>
+      </div>
+    </div>
   )
 }
 

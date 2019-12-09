@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom'
 
 const Profile = (props) => {
   return (
-    <div>
+    <div className="profile-tile">
       <Link to={`/profiles/${props.id}`}>
-        <li>
-          {props.name}
-        </li>
+        {props.name}
       </Link>
     </div>
   )

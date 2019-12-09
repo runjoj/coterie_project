@@ -38,8 +38,8 @@ class ProfileFormContainer extends Component {
 
   render(){
     return(
-      <div>
-        <h1>Fill in your details:</h1>
+      <div className="summary-form">
+        <h4>Fill in your information below:</h4>
         <form onSubmit={this.handleFormSubmit}>
           <InputField
             key='newName'
@@ -65,7 +65,7 @@ class ProfileFormContainer extends Component {
           <InputField
             key='newEmail'
             label='Email'
-            type='text'
+            type='email'
             name='newEmail'
             handleChange={this.props.handleEmailChange}
           />
@@ -80,6 +80,7 @@ class ProfileFormContainer extends Component {
             key='newCoverage'
             label='Coverage Amount'
             type='text'
+            name='newCoverage'
             handleChange={this.props.handleCoverageChange}
           />
           <input type='submit' />
