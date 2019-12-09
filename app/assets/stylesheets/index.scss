@@ -42,3 +42,19 @@
   margin: auto;
   max-width: 500px;
 }
+
+.profile-details {
+  padding-top: 40px;
+  display: block;
+  margin: auto;
+  max-width: 500px;
+
+  .profile-name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .profile-heading {
+    text-align: center;
+  }
+}
