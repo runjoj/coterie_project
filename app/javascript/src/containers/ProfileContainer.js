@@ -29,9 +29,9 @@ class ProfileContainer extends Component {
     })
     return (
       <div>
-        <ul>
+        <div className="profiles">
           {displayProfiles}
-        </ul>
+        </div>
         <ProfileFormContainer />
       </div>
     )
