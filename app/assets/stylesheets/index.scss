@@ -1,0 +1,23 @@
+@import 'colors';
+
+.start {
+  border-radius: 8px;
+  display: block;
+  max-width: 200px;
+  margin: auto;
+
+  a {
+    color: black;
+  }
+}
+
+.coterie {
+  a{
+    color: $medium-green;
+    font-weight: bold;
+  }
+}
+
+.welcome {
+  text-align: center;
+}
