@@ -18,13 +18,13 @@ class ShowProfileContainer extends Component {
     return(
       <div>
         <ShowProfile
-          key={this.props.id}
-          name={this.props.name}
-          birthday={this.props.birthday}
-          address={this.props.address}
-          email={this.props.email}
-          salary={this.props.salary}
-          coverage={this.props.coverage}
+          key={this.props.singleSummary.id}
+          name={this.props.singleSummary.name}
+          birthday={this.props.singleSummary.birthday}
+          address={this.props.singleSummary.address}
+          email={this.props.singleSummary.email}
+          salary={this.props.singleSummary.salary}
+          coverage={this.props.singleSummary.coverage}
         />
       </div>
     )
@@ -33,13 +33,7 @@ class ShowProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    id: state.summaries.profileSummary.id,
-    name: state.summaries.profileSummary.name,
-    birthday: state.summaries.profileSummary.birthday,
-    address: state.summaries.profileSummary.address,
-    email: state.summaries.profileSummary.email,
-    salary: state.summaries.profileSummary.salary,
-    coverage: state.summaries.profileSummary.coverage
+    singleSummary: state.summaries.singleSummary
   }
 }
 

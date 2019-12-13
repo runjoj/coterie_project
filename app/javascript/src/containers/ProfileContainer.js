@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import ProfileFormContainer from './ProfileFormContainer'
 import Profile from '../components/Profile'
-import { getProfile } from '../modules/profiles'
+import { getProfiles } from '../modules/summaries'
 
 class ProfileContainer extends Component {
   constructor(props) {
@@ -11,19 +11,16 @@ class ProfileContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.getProfile()
+    this.props.getProfiles()
   }
 
   render() {
-    let displayProfiles = this.props.allProfiles.map((profile) => {
-      let id = profile.id
-      let name = profile.name
-
+    let displayProfiles = this.props.allSummaries.map((profile) => {
       return (
         <Profile
-          key={id}
-          id={id}
-          name={name}
+          key={profile.id}
+          id={profile.id}
+          name={profile.name}
         />
       )
     })
@@ -40,13 +37,13 @@ class ProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allProfiles: state.profiles.allProfiles
+    allSummaries: state.summaries.allSummaries
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getProfile: () => dispatch(getProfile())
+    getProfiles: () => dispatch(getProfiles())
   }
 }
 

@@ -1,8 +1,10 @@
 import { displayAlertMessage } from './alertMessage.js'
 
 const initialState = {
-  profileSummary: [],
-  summaryId: ''
+  allSummaries: [],
+  singleSummary: {},
+  summaryId: '',
+  isFetching: false
 }
 
 const summaries = (state = initialState, action) => {
@@ -12,10 +14,9 @@ const summaries = (state = initialState, action) => {
         isFetching: true
       })
     case POST_PROFILE_REQUEST_SUCCESS:
-      console.log(action.profile)
-      const newProfile = state.profileSummary.concat([action.profile])
+      const newProfile = state.allSummaries.concat([action.profile])
       return Object.assign({}, state, {
-        profileSummary: newProfile,
+        allSummaries: newProfile,
         isFetching: false
       })
     case POST_PROFILE_REQUEST_FAILURE:
@@ -25,14 +26,27 @@ const summaries = (state = initialState, action) => {
     case SHOW_PROFILE_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
-        summaryId: state.profileSummary.id
+        summaryId: state.allSummaries.id
       })
     case SHOW_PROFILE_REQUEST_SUCCESS:
       return Object.assign({}, state, {
-        profileSummary: action.summaries,
+        singleSummary: action.summary,
         isFetching: false
       })
     case SHOW_PROFILE_REQUEST_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false
+      })
+    case GET_PROFILES_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case GET_PROFILES_REQUEST_SUCCESS:
+      return Object.assign({}, state, {
+        allSummaries: action.profiles,
+        isFetching: false
+      })
+    case GET_PROFILES_REQUEST_FAILURE:
       return Object.assign({}, state, {
         isFetching: false
       })
@@ -76,10 +90,10 @@ const showProfileRequest = () => {
 
 const SHOW_PROFILE_REQUEST_SUCCESS = 'SHOW_PROFILE_REQUEST_SUCCESS'
 
-const showProfileRequestSuccess = summaries => {
+const showProfileRequestSuccess = summary => {
   return {
     type: SHOW_PROFILE_REQUEST_SUCCESS,
-    summaries
+    summary
   }
 }
 
@@ -91,6 +105,52 @@ const showProfileRequestFailure = () => {
   }
 }
 
+const GET_PROFILES_REQUEST = 'GET_PROFILES_REQUEST'
+
+const getProfilesRequest = () => {
+  return {
+    type: GET_PROFILES_REQUEST
+  }
+}
+
+const GET_PROFILES_REQUEST_SUCCESS = 'GET_PROFILES_REQUEST_SUCCESS'
+
+const getProfilesRequestSuccess = profiles => {
+  return {
+    type: GET_PROFILES_REQUEST_SUCCESS,
+    profiles
+  }
+}
+
+const GET_PROFILES_REQUEST_FAILURE = 'GET_PROFILES_REQUEST_FAILURE'
+
+const getProfilesRequestFailure = () => {
+  return {
+    type: GET_PROFILES_REQUEST_FAILURE
+  }
+}
+
+const getProfiles = () => {
+  return (dispatch) => {
+    dispatch(getProfilesRequest())
+
+    return fetch('/api/v1/profiles.json')
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        dispatch(getProfilesRequestFailure())
+        dispatch(displayAlertMessage("Something went wrong."))
+        return { error: 'Something went wrong.' }
+      }
+    })
+    .then(profiles => {
+      if(!profiles.error){
+        dispatch(getProfilesRequestSuccess(profiles))
+      }
+    })
+  }
+}
 
 const showProfile = (summaryKey) => {
   return (dispatch) => {
@@ -111,9 +171,9 @@ const showProfile = (summaryKey) => {
         return { error: 'Something went wrong.' }
       }
     })
-    .then(profile => {
-      if(!profile.error){
-        dispatch(showProfileRequestSuccess(profile))
+    .then(summary => {
+      if(!summary.error){
+        dispatch(showProfileRequestSuccess(summary))
       }
     })
   }
@@ -141,7 +201,6 @@ const postProfile = summaryData => {
       }
     })
     .then(profile => {
-      console.log(profile)
       if(!profile.error){
         dispatch(postProfileRequestSuccess(profile))
       }
@@ -152,5 +211,6 @@ const postProfile = summaryData => {
 export {
   summaries,
   postProfile,
-  showProfile
+  showProfile,
+  getProfiles
 }
