@@ -2,13 +2,6 @@ import { displayAlertMessage } from './alertMessage.js'
 
 const initialState = {
   profileSummary: [],
-  name: '',
-  birthday: null,
-  address: '',
-  email: '',
-  salary: null,
-  coverage: null,
-  isFetching: false,
   summaryId: ''
 }
 
@@ -19,7 +12,8 @@ const summaries = (state = initialState, action) => {
         isFetching: true
       })
     case POST_PROFILE_REQUEST_SUCCESS:
-      const newProfile = state.profileSummary.concat(action.profile)
+      console.log(action.profile)
+      const newProfile = state.profileSummary.concat([action.profile])
       return Object.assign({}, state, {
         profileSummary: newProfile,
         isFetching: false
@@ -42,39 +36,6 @@ const summaries = (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetching: false
       })
-    case CLEAR_FORM:
-      return Object.assign({}, state, {
-        name: '',
-        birthday: null,
-        address: '',
-        email: '',
-        salary: null,
-        coverage: null
-      })
-    case HANDLE_NAME_CHANGE:
-      return Object.assign({}, state, {
-        name: action.newName
-      })
-    case HANDLE_BIRTHDAY_CHANGE:
-      return Object.assign({}, state, {
-        birthday: action.newBirthday
-      })
-    case HANDLE_ADDRESS_CHANGE:
-      return Object.assign({}, state, {
-        address: action.newAddress
-      })
-    case HANDLE_EMAIL_CHANGE:
-      return Object.assign({}, state, {
-        email: action.newEmail
-      })
-    case HANDLE_SALARY_CHANGE:
-      return Object.assign({}, state, {
-        salary: action.newSalary
-      })
-    case HANDLE_COVERAGE_CHANGE:
-      return Object.assign({}, state, {
-        coverage: action.newCoverage
-      })
     default:
       return state
   }
@@ -90,10 +51,10 @@ const postProfileRequest = () => {
 
 const POST_PROFILE_REQUEST_SUCCESS = 'POST_PROFILE_REQUEST_SUCCESS'
 
-const postProfileRequestSuccess = summaries => {
+const postProfileRequestSuccess = profile => {
   return {
     type: POST_PROFILE_REQUEST_SUCCESS,
-    summaries
+    profile
   }
 }
 
@@ -130,73 +91,6 @@ const showProfileRequestFailure = () => {
   }
 }
 
-const CLEAR_FORM = 'CLEAR_FORM'
-
-const clearForm = () => {
-  return {
-    type: CLEAR_FORM
-  }
-}
-
-const HANDLE_NAME_CHANGE = 'HANDLE_NAME_CHANGE'
-
-const handleNameChange = event => {
-  const newName = event.target.value
-  return {
-    type: HANDLE_NAME_CHANGE,
-    newName
-  }
-}
-
-const HANDLE_BIRTHDAY_CHANGE = 'HANDLE_BIRTHDAY_CHANGE'
-
-const handleBirthdayChange = event => {
-  const newBirthday = event.target.value
-  return {
-    type: HANDLE_BIRTHDAY_CHANGE,
-    newBirthday
-  }
-}
-
-const HANDLE_ADDRESS_CHANGE = 'HANDLE_ADDRESS_CHANGE'
-
-const handleAddressChange = event => {
-  const newAddress = event.target.value
-  return {
-    type: HANDLE_ADDRESS_CHANGE,
-    newAddress
-  }
-}
-
-const HANDLE_EMAIL_CHANGE = 'HANDLE_EMAIL_CHANGE'
-
-const handleEmailChange = event => {
-  const newEmail = event.target.value
-  return {
-    type: HANDLE_EMAIL_CHANGE,
-    newEmail
-  }
-}
-
-const HANDLE_SALARY_CHANGE = 'HANDLE_SALARY_CHANGE'
-
-const handleSalaryChange = event => {
-  const newSalary = event.target.value
-  return {
-    type: HANDLE_SALARY_CHANGE,
-    newSalary
-  }
-}
-
-const HANDLE_COVERAGE_CHANGE = 'HANDLE_COVERAGE_CHANGE'
-
-const handleCoverageChange = event => {
-  const newCoverage = event.target.value
-  return {
-    type: HANDLE_COVERAGE_CHANGE,
-    newCoverage
-  }
-}
 
 const showProfile = (summaryKey) => {
   return (dispatch) => {
@@ -247,6 +141,7 @@ const postProfile = summaryData => {
       }
     })
     .then(profile => {
+      console.log(profile)
       if(!profile.error){
         dispatch(postProfileRequestSuccess(profile))
       }
@@ -257,12 +152,5 @@ const postProfile = summaryData => {
 export {
   summaries,
   postProfile,
-  showProfile,
-  clearForm,
-  handleNameChange,
-  handleEmailChange,
-  handleAddressChange,
-  handleBirthdayChange,
-  handleSalaryChange,
-  handleCoverageChange
+  showProfile
 }

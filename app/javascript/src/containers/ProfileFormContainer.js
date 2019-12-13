@@ -15,25 +15,50 @@ import InputField from '../components/InputField'
 class ProfileFormContainer extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      name: '',
+      birthday: '',
+      address: '',
+      email: '',
+      salary: '',
+      coverage: ''
+    }
 
+    this.handleChange = this.handleChange.bind(this)
+    this.clearForm = this.clearForm.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+  }
+
+  handleChange(event) {
+    this.setState({ [event.target.name] : event.target.value })
+  }
+
+  clearForm() {
+    this.setState({
+      name: '',
+      birthday: '',
+      address: '',
+      email: '',
+      salary: '',
+      coverage: ''
+    })
   }
 
   handleFormSubmit(event) {
     event.preventDefault()
 
     const summaryData = {
-      name: this.props.name,
-      birthday: this.props.birthday,
-      address: this.props.address,
-      email: this.props.email,
-      salary: this.props.salary,
-      coverage: this.props.coverage
+      name: this.state.name,
+      birthday: this.state.birthday,
+      address: this.state.address,
+      email: this.state.email,
+      salary: this.state.salary,
+      coverage: this.state.coverage
     }
 
     this.props.postProfile(summaryData)
 
-    this.props.clearForm()
+    this.clearForm(event)
   }
 
   render(){
@@ -42,46 +67,46 @@ class ProfileFormContainer extends Component {
         <h4>Fill in your information below:</h4>
         <form onSubmit={this.handleFormSubmit}>
           <InputField
-            key='newName'
             label='Full Name'
             type='text'
-            name='newName'
-            handleChange={this.props.handleNameChange}
+            name='name'
+            content={this.state.name}
+            handleChange={this.handleChange}
           />
           <InputField
-            key='newbirthday'
             label='Date of Birth'
             type='date'
-            name='newBirthday'
-            handleChange={this.props.handleBirthdayChange}
+            name='birthday'
+            content={this.state.birthday}
+            handleChange={this.handleChange}
           />
           <InputField
-            key='newAddress'
             label='Address'
             type='text'
-            name='newAddress'
-            handleChange={this.props.handleAddressChange}
+            name='address'
+            content={this.state.address}
+            handleChange={this.handleChange}
           />
           <InputField
-            key='newEmail'
             label='Email'
             type='email'
-            name='newEmail'
-            handleChange={this.props.handleEmailChange}
+            name='email'
+            content={this.state.email}
+            handleChange={this.handleChange}
           />
           <InputField
-            key='newSalary'
             label='Salary'
             type='text'
-            name='newSalary'
-            handleChange={this.props.handleSalaryChange}
+            name='salary'
+            content={this.state.salary}
+            handleChange={this.handleChange}
           />
           <InputField
-            key='newCoverage'
             label='Coverage Amount'
             type='text'
-            name='newCoverage'
-            handleChange={this.props.handleCoverageChange}
+            name='coverage'
+            content={this.state.coverage}
+            handleChange={this.handleChange}
           />
           <input type='submit' />
         </form>
@@ -90,31 +115,13 @@ class ProfileFormContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    name: state.summaries.name,
-    birthday: state.summaries.birthday,
-    address: state.summaries.address,
-    email: state.summaries.email,
-    salary: state.summaries.salary,
-    coverage: state.summaries.coverage
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     postProfile: (profile) => dispatch(postProfile(profile)),
-    clearForm: () => dispatch(clearForm()),
-    handleNameChange: (event) => dispatch(handleNameChange(event)),
-    handleBirthdayChange: (event) => dispatch(handleBirthdayChange(event)),
-    handleAddressChange: (event) => dispatch(handleAddressChange(event)),
-    handleEmailChange: (event) => dispatch(handleEmailChange(event)),
-    handleSalaryChange: (event) => dispatch(handleSalaryChange(event)),
-    handleCoverageChange: (event) => dispatch(handleCoverageChange(event))
   }
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(ProfileFormContainer)
