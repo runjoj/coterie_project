@@ -16,14 +16,11 @@ class ProfileContainer extends Component {
 
   render() {
     let displayProfiles = this.props.allSummaries.map((profile) => {
-      let id = profile.id
-      let name = profile.name
-
       return (
         <Profile
-          key={id}
-          id={id}
-          name={name}
+          key={profile.id}
+          id={profile.id}
+          name={profile.name}
         />
       )
     })

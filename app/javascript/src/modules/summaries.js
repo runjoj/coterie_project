@@ -13,7 +13,6 @@ const summaries = (state = initialState, action) => {
         isFetching: true
       })
     case POST_PROFILE_REQUEST_SUCCESS:
-      console.log(action.profile)
       const newProfile = state.allSummaries.concat([action.profile])
       return Object.assign({}, state, {
         allSummaries: newProfile,
@@ -26,11 +25,12 @@ const summaries = (state = initialState, action) => {
     case SHOW_PROFILE_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
-        summaryId: state.profileSummary.id
+        summaryId: state.allSummaries.id
       })
     case SHOW_PROFILE_REQUEST_SUCCESS:
+    const newSummary = state.allSummaries.concat([action.summary])
       return Object.assign({}, state, {
-        profileSummary: action.summaries,
+        allSummaries: newSummary,
         isFetching: false
       })
     case SHOW_PROFILE_REQUEST_FAILURE:
@@ -43,7 +43,7 @@ const summaries = (state = initialState, action) => {
       })
     case GET_PROFILES_REQUEST_SUCCESS:
       return Object.assign({}, state, {
-        allProfiles: action.profiles,
+        allSummaries: action.summaries,
         isFetching: false
       })
     case GET_PROFILES_REQUEST_FAILURE:
@@ -90,10 +90,10 @@ const showProfileRequest = () => {
 
 const SHOW_PROFILE_REQUEST_SUCCESS = 'SHOW_PROFILE_REQUEST_SUCCESS'
 
-const showProfileRequestSuccess = summaries => {
+const showProfileRequestSuccess = summary => {
   return {
     type: SHOW_PROFILE_REQUEST_SUCCESS,
-    summaries
+    summary
   }
 }
 
@@ -171,9 +171,9 @@ const showProfile = (summaryKey) => {
         return { error: 'Something went wrong.' }
       }
     })
-    .then(profile => {
-      if(!profile.error){
-        dispatch(showProfileRequestSuccess(profile))
+    .then(summary => {
+      if(!summary.error){
+        dispatch(showProfileRequestSuccess(summary))
       }
     })
   }
@@ -201,7 +201,6 @@ const postProfile = summaryData => {
       }
     })
     .then(profile => {
-      console.log(profile)
       if(!profile.error){
         dispatch(postProfileRequestSuccess(profile))
       }
