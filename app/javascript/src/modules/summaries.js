@@ -43,7 +43,7 @@ const summaries = (state = initialState, action) => {
       })
     case GET_PROFILES_REQUEST_SUCCESS:
       return Object.assign({}, state, {
-        allSummaries: action.summaries,
+        allSummaries: action.profiles,
         isFetching: false
       })
     case GET_PROFILES_REQUEST_FAILURE:
