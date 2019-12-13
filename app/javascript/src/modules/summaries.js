@@ -1,8 +1,9 @@
 import { displayAlertMessage } from './alertMessage.js'
 
 const initialState = {
-  profileSummary: [],
-  summaryId: ''
+  allSummaries: [],
+  summaryId: '',
+  isFetching: false
 }
 
 const summaries = (state = initialState, action) => {
@@ -13,9 +14,9 @@ const summaries = (state = initialState, action) => {
       })
     case POST_PROFILE_REQUEST_SUCCESS:
       console.log(action.profile)
-      const newProfile = state.profileSummary.concat([action.profile])
+      const newProfile = state.allSummaries.concat([action.profile])
       return Object.assign({}, state, {
-        profileSummary: newProfile,
+        allSummaries: newProfile,
         isFetching: false
       })
     case POST_PROFILE_REQUEST_FAILURE:
@@ -33,6 +34,19 @@ const summaries = (state = initialState, action) => {
         isFetching: false
       })
     case SHOW_PROFILE_REQUEST_FAILURE:
+      return Object.assign({}, state, {
+        isFetching: false
+      })
+    case GET_PROFILES_REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true
+      })
+    case GET_PROFILES_REQUEST_SUCCESS:
+      return Object.assign({}, state, {
+        allProfiles: action.profiles,
+        isFetching: false
+      })
+    case GET_PROFILES_REQUEST_FAILURE:
       return Object.assign({}, state, {
         isFetching: false
       })
@@ -91,6 +105,52 @@ const showProfileRequestFailure = () => {
   }
 }
 
+const GET_PROFILES_REQUEST = 'GET_PROFILES_REQUEST'
+
+const getProfilesRequest = () => {
+  return {
+    type: GET_PROFILES_REQUEST
+  }
+}
+
+const GET_PROFILES_REQUEST_SUCCESS = 'GET_PROFILES_REQUEST_SUCCESS'
+
+const getProfilesRequestSuccess = profiles => {
+  return {
+    type: GET_PROFILES_REQUEST_SUCCESS,
+    profiles
+  }
+}
+
+const GET_PROFILES_REQUEST_FAILURE = 'GET_PROFILES_REQUEST_FAILURE'
+
+const getProfilesRequestFailure = () => {
+  return {
+    type: GET_PROFILES_REQUEST_FAILURE
+  }
+}
+
+const getProfiles = () => {
+  return (dispatch) => {
+    dispatch(getProfilesRequest())
+
+    return fetch('/api/v1/profiles.json')
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        dispatch(getProfilesRequestFailure())
+        dispatch(displayAlertMessage("Something went wrong."))
+        return { error: 'Something went wrong.' }
+      }
+    })
+    .then(profiles => {
+      if(!profiles.error){
+        dispatch(getProfilesRequestSuccess(profiles))
+      }
+    })
+  }
+}
 
 const showProfile = (summaryKey) => {
   return (dispatch) => {
@@ -152,5 +212,6 @@ const postProfile = summaryData => {
 export {
   summaries,
   postProfile,
-  showProfile
+  showProfile,
+  getProfiles
 }

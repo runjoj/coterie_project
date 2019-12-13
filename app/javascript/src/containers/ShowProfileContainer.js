@@ -11,7 +11,7 @@ class ShowProfileContainer extends Component {
 
   componentDidMount() {
     const summaryKey = this.props.match.params.id
-    this.props.showProfile(summaryKey)
+    this.props.allSummaries(summaryKey)
   }
 
   render() {
@@ -33,8 +33,8 @@ class ShowProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    id: state.summaries.profileSummary.id,
-    name: state.summaries.profileSummary.name,
+    id: state.summaries.allSummaries.id,
+    name: state.summaries.allSummaries.name,
     birthday: state.summaries.profileSummary.birthday,
     address: state.summaries.profileSummary.address,
     email: state.summaries.profileSummary.email,
