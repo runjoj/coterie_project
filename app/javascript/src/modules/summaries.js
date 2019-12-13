@@ -2,6 +2,7 @@ import { displayAlertMessage } from './alertMessage.js'
 
 const initialState = {
   allSummaries: [],
+  singleSummary: {},
   summaryId: '',
   isFetching: false
 }
@@ -28,9 +29,8 @@ const summaries = (state = initialState, action) => {
         summaryId: state.allSummaries.id
       })
     case SHOW_PROFILE_REQUEST_SUCCESS:
-    const newSummary = state.allSummaries.concat([action.summary])
       return Object.assign({}, state, {
-        allSummaries: newSummary,
+        singleSummary: action.summary,
         isFetching: false
       })
     case SHOW_PROFILE_REQUEST_FAILURE:

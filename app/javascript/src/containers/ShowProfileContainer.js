@@ -15,24 +15,17 @@ class ShowProfileContainer extends Component {
   }
 
   render() {
-    let summary = this.props.allSummaries.map(summary => {
-      return(
-        <div>
-          <ShowProfile
-            key={summary.id}
-            name={summary.name}
-            birthday={summary.birthday}
-            address={summary.address}
-            email={summary.email}
-            salary={summary.salary}
-            coverage={summary.coverage}
-          />
-        </div>
-      )
-    })
     return(
       <div>
-        {summary}
+        <ShowProfile
+          key={this.props.singleSummary.id}
+          name={this.props.singleSummary.name}
+          birthday={this.props.singleSummary.birthday}
+          address={this.props.singleSummary.address}
+          email={this.props.singleSummary.email}
+          salary={this.props.singleSummary.salary}
+          coverage={this.props.singleSummary.coverage}
+        />
       </div>
     )
   }
@@ -40,7 +33,7 @@ class ShowProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    allSummaries: state.summaries.allSummaries
+    singleSummary: state.summaries.singleSummary
   }
 }
 
