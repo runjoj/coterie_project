@@ -11,6 +11,7 @@ import { clearForm,
 } from '../modules/summaries'
 
 import InputField from '../components/InputField'
+import SelectField from '../components/SelectField'
 
 class ProfileFormContainer extends Component {
   constructor(props) {
@@ -101,7 +102,7 @@ class ProfileFormContainer extends Component {
             content={this.state.salary}
             handleChange={this.handleChange}
           />
-          <InputField
+          <SelectField
             label='Coverage Amount'
             type='text'
             name='coverage'
