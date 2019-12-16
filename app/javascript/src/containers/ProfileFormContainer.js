@@ -79,21 +79,21 @@ class ProfileFormContainer extends Component {
         visibleForm =
           <div>
             <InputField
-              label='Full Name'
+              label='Full Name:'
               type='text'
               name='name'
               content={this.state.name}
               handleChange={this.handleChange}
             />
             <InputField
-              label='Date of Birth'
+              label='Date of Birth:'
               type='date'
               name='birthday'
               content={this.state.birthday}
               handleChange={this.handleChange}
             />
             <InputField
-              label='Address'
+              label='Address:'
               type='text'
               name='address'
               content={this.state.address}
@@ -107,21 +107,21 @@ class ProfileFormContainer extends Component {
         visibleForm =
           <div>
             <InputField
-              label='Email'
+              label='Email:'
               type='email'
               name='email'
               content={this.state.email}
               handleChange={this.handleChange}
             />
             <InputField
-              label='Salary'
+              label='Salary:'
               type='text'
               name='salary'
               content={this.state.salary}
               handleChange={this.handleChange}
             />
             <SelectField
-              label='Coverage Amount'
+              label='Coverage Amount:'
               name='coverage'
               content={this.state.coverage}
               handleChange={this.handleChange}
@@ -129,13 +129,13 @@ class ProfileFormContainer extends Component {
             <SwitchForm
               handleFunction={this.switchForm}
               name='Back'/>
-            <input className="button yellow form-button" type='submit' />
+            <input className="button orange form-button" type='submit' />
           </div>
       }
 
     return(
       <div className="summary-form">
-        <h4>Fill in your information below:</h4>
+        <h4 className="form-title">Fill in your information below:</h4>
         <form onSubmit={this.handleFormSubmit}>
           {visibleForm}
         </form>

@@ -1,34 +1,22 @@
 @import 'colors';
 
-.start {
-  border-radius: 8px;
-  display: block;
-  max-width: 200px;
-  margin: auto;
-  margin-top: 15px;
+.profile-tile {
+  background: $purple;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 170px;
+  text-align: center;
 
   a {
-    color: black;
-  }
-}
-
-.coterie {
-  a{
-    color: $medium-green;
+    color: $white;
+    font-size: 20px;
     font-weight: bold;
   }
-}
 
-.welcome {
-  text-align: center;
-}
-
-.profile-tile {
-  background: $grey;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 5px;
-  max-width: 150px;
+  a:hover {
+    color: $blue;
+  }
 }
 
 .profiles {
@@ -36,34 +24,4 @@
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   grid-gap: 10px;
-}
-
-.summary-form {
-  display: block;
-  margin: auto;
-  max-width: 500px;
-}
-
-.profile-details {
-  padding-top: 40px;
-  display: block;
-  margin: auto;
-  max-width: 500px;
-
-  .profile-name {
-    font-weight: bold;
-    text-decoration: underline;
-  }
-
-  .profile-heading {
-    text-align: center;
-  }
-}
-
-.form-button {
-  border-radius: 8px;
-  width: 90px;
-  margin: auto;
-  display: block;
-  margin-top: 15px;
 }
