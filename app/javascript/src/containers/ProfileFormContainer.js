@@ -12,6 +12,7 @@ import { clearForm,
 
 import InputField from '../components/InputField'
 import SelectField from '../components/SelectField'
+import SwitchForm from '../components/SwitchForm'
 
 class ProfileFormContainer extends Component {
   constructor(props) {
@@ -22,12 +23,14 @@ class ProfileFormContainer extends Component {
       address: '',
       email: '',
       salary: '',
-      coverage: '5000'
+      coverage: '5000',
+      showFirstSection: true
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.clearForm = this.clearForm.bind(this)
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.switchForm = this.switchForm.bind(this)
   }
 
   handleChange(event) {
@@ -61,53 +64,80 @@ class ProfileFormContainer extends Component {
     this.clearForm(event)
   }
 
+  switchForm(event){
+    if (this.state.showFirstSection == true) {
+      this.setState({ showFirstSection: false })
+    } else if (this.state.showFirstSection == false) {
+      this.setState({ showFirstSection: true})
+    }
+  }
+
   render(){
+    let visibleForm;
+
+      if (this.state.showFirstSection == true) {
+        visibleForm =
+          <div>
+            <InputField
+              label='Full Name'
+              type='text'
+              name='name'
+              content={this.state.name}
+              handleChange={this.handleChange}
+            />
+            <InputField
+              label='Date of Birth'
+              type='date'
+              name='birthday'
+              content={this.state.birthday}
+              handleChange={this.handleChange}
+            />
+            <InputField
+              label='Address'
+              type='text'
+              name='address'
+              content={this.state.address}
+              handleChange={this.handleChange}
+            />
+            <SwitchForm
+              handleFunction={this.switchForm}
+              name='Next'/>
+          </div>
+      } else if (this.state.showFirstSection == false) {
+        visibleForm =
+          <div>
+            <InputField
+              label='Email'
+              type='email'
+              name='email'
+              content={this.state.email}
+              handleChange={this.handleChange}
+            />
+            <InputField
+              label='Salary'
+              type='text'
+              name='salary'
+              content={this.state.salary}
+              handleChange={this.handleChange}
+            />
+            <SelectField
+              label='Coverage Amount'
+              name='coverage'
+              content={this.state.coverage}
+              handleChange={this.handleChange}
+            />
+            <SwitchForm
+              handleFunction={this.switchForm}
+              name='Back'/>
+            <input className="button yellow form-button" type='submit' />
+          </div>
+      }
+
     return(
       <div className="summary-form">
         <h4>Fill in your information below:</h4>
         <form onSubmit={this.handleFormSubmit}>
-          <InputField
-            label='Full Name'
-            type='text'
-            name='name'
-            content={this.state.name}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            label='Date of Birth'
-            type='date'
-            name='birthday'
-            content={this.state.birthday}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            label='Address'
-            type='text'
-            name='address'
-            content={this.state.address}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            label='Email'
-            type='email'
-            name='email'
-            content={this.state.email}
-            handleChange={this.handleChange}
-          />
-          <InputField
-            label='Salary'
-            type='text'
-            name='salary'
-            content={this.state.salary}
-            handleChange={this.handleChange}
-          />
-          <SelectField
-            label='Coverage Amount'
-            name='coverage'
-            content={this.state.coverage}
-            handleChange={this.handleChange}
-          />
-          <input type='submit' />
+          {visibleForm}
         </form>
       </div>
     )
