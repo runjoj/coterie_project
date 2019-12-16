@@ -1,11 +1,36 @@
+@import 'colors';
+
 .devise-form {
   display: block;
   margin: auto;
   max-width: 500px;
+
+  .devise-field {
+
+    label {
+      font-size: 18px;
+    }
+
+    input {
+      border-radius: 20px;
+      padding: 20px;
+    }
+  }
 }
 
 .devise-header {
   text-align: center;
   text-decoration: underline;
   padding-top: 15px;
+}
+
+.log-in {
+  margin-top: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+
+  a {
+    color: $white;
+    font-weight: bold;
+  }
 }
