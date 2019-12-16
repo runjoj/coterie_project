@@ -22,7 +22,7 @@ class ProfileFormContainer extends Component {
       address: '',
       email: '',
       salary: '',
-      coverage: ''
+      coverage: '5000'
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -41,7 +41,7 @@ class ProfileFormContainer extends Component {
       address: '',
       email: '',
       salary: '',
-      coverage: ''
+      coverage: '5000'
     })
   }
 
@@ -56,7 +56,6 @@ class ProfileFormContainer extends Component {
       salary: this.state.salary,
       coverage: this.state.coverage
     }
-
     this.props.postProfile(summaryData)
 
     this.clearForm(event)
@@ -104,7 +103,6 @@ class ProfileFormContainer extends Component {
           />
           <SelectField
             label='Coverage Amount'
-            type='text'
             name='coverage'
             content={this.state.coverage}
             handleChange={this.handleChange}
