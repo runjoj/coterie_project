@@ -4,7 +4,7 @@ const SelectField = props => {
   return(
     <div>
       <label>{props.label}
-        <select value={props.value} onChange={props.handleChange}>
+        <select value={props.content} onChange={props.handleChange} name={props.name}>
           <option value="5000">5,000</option>
           <option value="10000">10,000</option>
           <option value="15000">15,000</option>
