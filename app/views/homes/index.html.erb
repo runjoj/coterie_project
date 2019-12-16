@@ -1,13 +1,13 @@
-<div>
+<div class="landing-page">
   <br />
   <h3 class="welcome">Welcome to a world where insurance is made easy by Coterie!</h3>
   <br />
   <ul>
     <%- if current_user -%>
-      <li class="start button large yellow"><%= link_to 'START HERE', profiles_path %></li>
+      <li class="start button large orange"><%= link_to 'START HERE', profiles_path %></li>
     <%- else -%>
-      <li class="start button large yellow"><%= link_to 'Sign Up', new_user_registration_path %></li>
-      <li class="start button large yellow"><%= link_to 'Sign In', new_user_session_path %></li>
+      <li class="start button large orange"><%= link_to 'SIGN UP', new_user_registration_path %></li>
+      <li class="start button large orange"><%= link_to 'SIGN IN', new_user_session_path %></li>
     <%- end -%>
   </ul>
 </div>

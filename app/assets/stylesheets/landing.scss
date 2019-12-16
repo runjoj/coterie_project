@@ -1,0 +1,60 @@
+@import 'colors';
+
+.landing-page {
+  background-color: $purple;
+  padding-bottom: 5000px;
+}
+
+.top-bar {
+  background-color: $purple;
+}
+
+.start {
+  border-radius: 8px;
+  display: block;
+  max-width: 200px;
+  margin: auto;
+  margin-top: 15px;
+
+  a {
+    color: $white;
+    font-weight: bold;
+  }
+}
+
+.coterie {
+  margin-left: 20px;
+  font-size: 50px;
+
+  a {
+    color: $white;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: $blue;
+  }
+}
+
+.welcome {
+  text-align: center;
+  color: $white;
+  margin-top: 100px;
+}
+
+.header-links {
+  display: inline;
+  float: left;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+
+  a {
+    color: $white;
+    margin-bottom: -20px;
+  }
+
+  a:hover {
+    color: $blue;
+  }
+}

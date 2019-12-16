@@ -1,0 +1,42 @@
+@import 'colors';
+
+.profile-details {
+  padding-top: 40px;
+  display: block;
+  margin: auto;
+  width: 400px;
+
+  .profile-name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .profile-heading {
+    text-align: center;
+    color: $purple;
+  }
+
+  .summary-details {
+    background-color: $purple;
+    color: $white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+.back-button {
+  border-radius: 8px;
+  width: 90px;
+  margin: auto;
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+
+  a {
+    color: $white;
+  }
+}

@@ -4,7 +4,7 @@ const SwitchForm = props => {
 
   return (
     <div>
-      <p onClick={props.handleFunction} className="button form-button yellow">{props.name}</p>
+      <p onClick={props.handleFunction} className="button form-button orange">{props.name}</p>
     </div>
   )
 }

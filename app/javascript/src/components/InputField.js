@@ -9,6 +9,7 @@ const InputField = props => {
           name={props.name}
           value={props.content}
           onChange={props.handleChange}
+          className="input-field"
         />
       </label>
     </div>
